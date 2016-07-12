@@ -28,15 +28,20 @@ Computer.prototype.addToTotal = function() {
 
 Computer.prototype.roll = function() {
   for(var i = 0; i < 2; i++) {
-    this.rolls.push(getRandom(2, 6));
+    this.rolls.push(getRandom(1, 6));
     alert("Computer rolled a: " + this.rolls[i]);
     if (this.rolls[i] === 1) {
       this.rolls = [];
       alert("Wah waaahhh... It's your turn");
     } else {
       this.total += this.rolls[i];
-    } console.log(this.total);
+    }
+    console.log(this.total);
+    if (this.total >= 100) {
+      alert("Computer wins!");
+    }
   }
+  this.rolls = [];
   //console.log("Computer rolled a " + this.rolls);
   // this.rolls.forEach(function(roll) {
   //   if (roll === 1) {
