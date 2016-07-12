@@ -20,7 +20,7 @@ _{Leave nothing to chance! You want it to be easy for potential users, employers
 
 ## Known Bugs
 
-_{Are there issues that have not yet been resolved that you want to let users know you know?  Outline any issues that would impact use of your application.  Share any workarounds that are in place. }_
+* If user rolls a 1 on their turn and then tries to add that to their total result is TypeError: Reduce of empty array with no initial value;
 
 ## Support and contact details
 
