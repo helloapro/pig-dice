@@ -1,0 +1,5 @@
+Behavior                                          Input                   Output
+
+When a user rolls the dice it returns a number    Click "roll"            Returns a number
+
+When a user rolls a one, the next player goes     Click "roll"            Returns a one
