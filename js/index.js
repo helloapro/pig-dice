@@ -36,20 +36,20 @@ Computer.prototype.roll = function() {
 
   this.rolls.forEach(function(roll) {
     if (roll === 1) {
-      console.log("hey");
       exit = true;
     }
   })
 
   if (exit) {
     this.rolls = [];
-    alert("Wah waaahhh... It's your turn");
+    alert("Wah waaahhh... Computer rolled a 1!");
   } else {
     this.total = this.addToTotal();
     if (this.total >= 100) {
       alert("Computer wins!");
+      $("#robotCelebrate").show();
     }
-    console.log("Computer's total is: " + this.total);
+    $("#computerOutput").text("Computer's total is: " + this.total);
   }
 
   this.rolls = [];
@@ -76,17 +76,16 @@ $(function() {
   $("#hold").click(function() {
     newPlayer.total = newPlayer.addToTotal();
     if (newPlayer.total >= 100) {
-      $("#totalOutput").text(newPlayer.total);
+      $("#playerOutput").text("Player's total: " + newPlayer.total);
       alert("You win!");
-      newPlayer.total = 0;
-      newPlayer.rolls = [];
+      $("#humanCelebrate").show();
+      newPlayer.total, newComputer.total = 0;
+      newPlayer.rolls, newComputer.rolls = [];
     } else {
-      console.log("Player's total is: " +newPlayer.total);
       newPlayer.rolls = [];
-      $("#totalOutput").text(newPlayer.total);
+      $("#playerOutput").text("Player's total: " + newPlayer.total);
+      newComputer.roll();
     }
-
-    newComputer.roll();
   });
 
 });
