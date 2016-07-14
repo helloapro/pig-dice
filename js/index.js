@@ -10,9 +10,9 @@ function Player() {
 
 // use when player wants to hold
 Player.prototype.addToTotal = function() {
-   return (this.rolls.reduce(function(a,b) {
-     return a + b;
-   }) + this.total);
+  return (this.rolls.reduce(function(a,b) {
+    return a + b;
+  }) + this.total);
 }
 
 function Computer() {
@@ -21,39 +21,40 @@ function Computer() {
 }
 
 Computer.prototype.addToTotal = function() {
-   return (this.rolls.reduce(function(a,b) {
-     return a + b;
-   }) + this.total);
+  return (this.rolls.reduce(function(a,b) {
+    return a + b;
+  }) + this.total);
 }
 
 Computer.prototype.roll = function() {
+  var exit = false;
+
   for(var i = 0; i < 2; i++) {
     this.rolls.push(getRandom(1, 6));
     alert("Computer rolled a: " + this.rolls[i]);
-    if (this.rolls[i] === 1) {
-      this.rolls = [];
-      alert("Wah waaahhh... It's your turn");
-    } else {
-      this.total += this.rolls[i];
+  }
+
+  this.rolls.forEach(function(roll) {
+    if (roll === 1) {
+      console.log("hey");
+      exit = true;
     }
-    console.log(this.total);
+  })
+
+  if (exit) {
+    this.rolls = [];
+    alert("Wah waaahhh... It's your turn");
+  } else {
+    this.total = this.addToTotal();
     if (this.total >= 100) {
       alert("Computer wins!");
     }
+    console.log("Computer's total is: " + this.total);
   }
+
   this.rolls = [];
-  //console.log("Computer rolled a " + this.rolls);
-  // this.rolls.forEach(function(roll) {
-  //   if (roll === 1) {
-  //     this.rolls = [];
-  //     alert("It's your turn");
-  //   } else {
-  //     console.log(roll);
-  //     console.log(newComputer.total);
-  //     return newComputer.total += roll;
-  //   }
-  // })
 }
+
 
 //user interface logic
 $(function() {
@@ -62,14 +63,14 @@ $(function() {
 
   $("#dice").click(function() {
     $("#diceOutput").text(getRandom(1, 6));
-      if ($("#diceOutput").text() === "1") {
-        alert("You rolled at 1! Your turn is over.");
-        newPlayer.rolls = [];
-        newComputer.roll();
-      } else {
-        newPlayer.rolls.push(parseInt($("#diceOutput").text()));
-        console.log("Player's rolls are: " + newPlayer.rolls);
-      }
+    if ($("#diceOutput").text() === "1") {
+      alert("You rolled at 1! Your turn is over.");
+      newPlayer.rolls = [];
+      newComputer.roll();
+    } else {
+      newPlayer.rolls.push(parseInt($("#diceOutput").text()));
+      console.log("Player's rolls are: " + newPlayer.rolls);
+    }
   });
 
   $("#hold").click(function() {
@@ -84,6 +85,8 @@ $(function() {
       newPlayer.rolls = [];
       $("#totalOutput").text(newPlayer.total);
     }
+
+    newComputer.roll();
   });
 
 });
