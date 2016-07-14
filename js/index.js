@@ -63,10 +63,14 @@ $(function() {
 
   $("#dice").click(function() {
     $("#diceOutput").text(getRandom(1, 6));
+
+    // check diceOutput for a 1
     if ($("#diceOutput").text() === "1") {
       alert("You rolled at 1! Your turn is over.");
       newPlayer.rolls = [];
       newComputer.roll();
+
+      // push all other values to rolls array
     } else {
       newPlayer.rolls.push(parseInt($("#diceOutput").text()));
       console.log("Player's rolls are: " + newPlayer.rolls);
@@ -74,13 +78,19 @@ $(function() {
   });
 
   $("#hold").click(function() {
+
+    // add to users total
     newPlayer.total = newPlayer.addToTotal();
+
+    //check if total is equal to or over 100
     if (newPlayer.total >= 100) {
       $("#playerOutput").text("Player's total: " + newPlayer.total);
       alert("You win!");
       $("#humanCelebrate").show();
       newPlayer.total, newComputer.total = 0;
       newPlayer.rolls, newComputer.rolls = [];
+
+      // computer rolls
     } else {
       newPlayer.rolls = [];
       $("#playerOutput").text("Player's total: " + newPlayer.total);
